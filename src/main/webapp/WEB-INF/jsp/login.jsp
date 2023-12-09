@@ -6,7 +6,7 @@
 </head>
 <body>
 <main>
-    <h1>Bienvenue to the login page!</h1>
+    <h1>Bienvenue Sur La Page Page de Connexion!</h1>
     <form method="post">
 
         <label>
@@ -16,7 +16,7 @@
             Password: <input type="password" name="password">
         </label>
         <input type="submit">
-
+        <div>${errorMsg}</div>
     </form>
 </main>
 </body>
