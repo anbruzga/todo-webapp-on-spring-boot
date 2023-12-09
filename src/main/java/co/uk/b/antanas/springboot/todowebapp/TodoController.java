@@ -50,6 +50,12 @@ public class TodoController {
         return "redirect:list-todos";
     }
 
+    @RequestMapping(value="delete-todo")
+    public String deleteToDo(@RequestParam int id) {
+        todoService.deleteTodo(id);
+        return "redirect:list-todos";
+    }
+
     private synchronized static String getCurrentUserName(ModelMap model) {
         return (String) model.get("name");
     }

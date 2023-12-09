@@ -5,13 +5,15 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
 @Service
 public class TodoService {
 
-    private static List<Todo> todos = new ArrayList<>();
+    private static final AtomicInteger lastTodoId = new AtomicInteger(5);
+    private static final List<Todo> todos = new ArrayList<>();
+
     static {
         todos.add(new Todo(1, "tony", "Learn Spring", LocalDate.now().plusWeeks(12), false));
         todos.add(new Todo(2, "tony", "Learn AWS", LocalDate.now().plusWeeks(14), false));
@@ -19,8 +21,6 @@ public class TodoService {
         todos.add(new Todo(4, "Marta", "Learn Full Stack Development", LocalDate.now().plusWeeks(11), false));
         todos.add(new Todo(5, "tony", "Learn Full Stack Development", LocalDate.now().plusWeeks(11), false));
     }
-
-    private static AtomicInteger lastTodoId = new AtomicInteger(5);
 
 
     public List<Todo> findByUser(String username) {
@@ -31,4 +31,14 @@ public class TodoService {
         todos.add(new Todo(lastTodoId.addAndGet(1), username, description, targetDate, done));
     }
 
+    public void deleteTodo(int id) {
+       findTodoById(id).ifPresent(todos::remove);
+    }
+
+    private static Optional<Todo> findTodoById(int id) {
+        return todos.stream()
+                .filter(todo -> todo.getId() == id)
+                .findFirst();
+    }
+    
 }
