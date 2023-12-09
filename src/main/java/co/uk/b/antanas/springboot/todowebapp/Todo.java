@@ -1,5 +1,7 @@
 package co.uk.b.antanas.springboot.todowebapp;
 
+import jakarta.validation.constraints.Size;
+
 import java.time.LocalDate;
 
 // Database(MySQL or ...)
@@ -9,6 +11,8 @@ import java.time.LocalDate;
 public class Todo {
     private int id;
     private String username;
+
+    @Size(min=3, max=255, message="Description length has to be between 3 and 255 characters")
     private String description;
     private LocalDate targetDate;
     private boolean done;
