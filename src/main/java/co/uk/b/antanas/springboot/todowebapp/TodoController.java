@@ -32,21 +32,19 @@ public class TodoController {
     }
 
     @RequestMapping(value="add-todo", method = RequestMethod.GET)
-    public String showNewTodoPage() {
+    public String showNewTodoPage(ModelMap model) {
+        Todo todo = new Todo(0, getCurrentUserName(model), "", LocalDate.now().plusYears(1), false);
+        model.put("todo", todo);
         return "todo";
     }
 
-
-    /*
-        public String addNewTodo(ModelMap model, @RequestParam String username,
-                             @RequestParam String description,
-                             @RequestParam LocalDate targetDate,
-                             @RequestParam boolean done) {
-     */
     @RequestMapping(value="add-todo", method = RequestMethod.POST)
-    public String addNewTodo(ModelMap model, @RequestParam String description) {
-        String userName = (String) model.get("name");
-        todoService.addTodo(userName, description, LocalDate.now().plusYears(1), false);
+    public String addNewTodo(ModelMap model, Todo todo) {
+        todoService.addTodo(getCurrentUserName(model), todo.getDescription() , LocalDate.now().plusYears(1), false);
         return "redirect:list-todos";
+    }
+
+    private synchronized static String getCurrentUserName(ModelMap model) {
+        return (String) model.get("name");
     }
 }
