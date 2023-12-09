@@ -15,7 +15,9 @@ public class TodoService {
         todos.add(new Todo(1, "tony", "Learn Spring", LocalDate.now().plusWeeks(12), false));
         todos.add(new Todo(2, "tony", "Learn AWS", LocalDate.now().plusWeeks(14), false));
         todos.add(new Todo(3, "tony", "Learn React", LocalDate.now().plusWeeks(18), false));
-        todos.add(new Todo(4, "Marta", "Learn Angular", LocalDate.now().plusWeeks(11), false));
+        todos.add(new Todo(4, "Marta", "Learn Full Stack Development", LocalDate.now().plusWeeks(11), false));
+        todos.add(new Todo(5, "tony", "Learn Full Stack Development", LocalDate.now().plusWeeks(11), false));
+
     }
 
 
