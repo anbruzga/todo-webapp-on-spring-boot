@@ -13,7 +13,7 @@
 <main>
     <div class="container">
         <div style="text-align: center;">
-            <h4>Bienvenue Sur La Page d'Accueil, ${name}!</h4>
+            <h4>Todo List Page, ${name}!</h4>
             <hr>
         </div>
 
@@ -27,15 +27,19 @@
                 <th>Is Done?</th>
             </tr>
             </thead>
-            <c:forEach items="${todos}" var="todo">
-                <tr>
-                    <td>${todo.id}</td>
-                    <td>${todo.description}</td>
-                    <td>${todo.targetDate}</td>
-                    <td>${todo.done}</td>
-                </tr>
-            </c:forEach>
+            <tbody>
+                <c:forEach items="${todos}" var="todo">
+                    <tr>
+                        <td>${todo.id}</td>
+                        <td>${todo.description}</td>
+                        <td>${todo.targetDate}</td>
+                        <td>${todo.done}</td>
+                    </tr>
+                </c:forEach>
+            </tbody>
         </table>
+        <a href="add-todo" class="btn btn-success">Add Todo</a>
+
     </div>
 
 </main>

@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,34 +7,25 @@
           rel="stylesheet"
           crossorigin="anonymous">
     <meta charset="UTF-8">
-    <title>Login Page</title>
+    <title>Add To Do's Page</title>
 </head>
 <body>
+<div class="container">
 <main>
-    <div class="container">
-
-        <div style="text-align: center;">
-            <h4>Login Page, ${name}!</h4>
-            <hr>
-        </div>
+    <div>
+        <h1>Enter Todo Details</h1>
         <form method="post">
-            <pre>${errorMsg}</pre><br>
-            <label>
-                Name: <input type="text" name="name">
-            </label>
-            <label>
-                Password: <input type="password" name="password">
-            </label>
-            <input type="submit">
+            Description <input type="text" name="description"/>
+            <input type="submit" class="btn btn-success">
 
         </form>
     </div>
-</main>
 
+</main>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
         crossorigin="anonymous"></script>
 <script src=https://code.jquery.com/jquery-3.7.1.js></script>
-
 </body>
 </html>

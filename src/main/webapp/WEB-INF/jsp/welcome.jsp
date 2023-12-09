@@ -11,7 +11,7 @@
 <div class="container">
     <main>
         <div style="text-align: center;">
-            <h4>Bienvenue Sur La Page d'Accueil, ${name}!</h4>
+            <h4>Login Page, ${name}!</h4>
             <hr>
         </div>
         <div><a href="list-todos">Manage</a> your Todo's</div>
