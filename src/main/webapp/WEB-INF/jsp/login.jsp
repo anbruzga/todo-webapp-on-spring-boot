@@ -12,7 +12,7 @@
     <div class="container">
 
         <div style="text-align: center;">
-            <h4>Login Page, ${name}!</h4>
+            <h4>Login Page</h4>
             <hr>
         </div>
         <form method="post">

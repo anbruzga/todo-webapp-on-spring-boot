@@ -90,4 +90,16 @@ public class Todo {
                 '}';
     }
 
+    public void updateFieldsFrom(Todo source) {
+        if (source.getDescription() != null) {
+            this.setDescription(source.getDescription());
+        }
+        if (source.getUsername() != null) {
+            this.setUsername(source.getUsername());
+        }
+        if (source.getTargetDate() != null) {
+            this.setTargetDate(source.getTargetDate());
+        }
+        this.setDone(source.isDone());
+    }
 }

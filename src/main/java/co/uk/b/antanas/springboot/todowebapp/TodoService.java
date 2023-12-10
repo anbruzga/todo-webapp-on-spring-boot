@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 @Service
 public class TodoService {
@@ -24,7 +25,9 @@ public class TodoService {
 
 
     public List<Todo> findByUser(String username) {
-        return todos.stream().filter(todo -> todo.getUsername().equalsIgnoreCase(username)).toList();
+        return todos.stream()
+                .filter(todo -> username != null && username.equalsIgnoreCase(todo.getUsername()))
+                .collect(Collectors.toList());
     }
 
     public void addTodo(String username, String description, LocalDate targetDate, boolean done) {
@@ -32,13 +35,16 @@ public class TodoService {
     }
 
     public void deleteTodo(int id) {
-       findTodoById(id).ifPresent(todos::remove);
+       findById(id).ifPresent(todos::remove);
     }
 
-    private static Optional<Todo> findTodoById(int id) {
+    public Optional<Todo> findById(int id) {
         return todos.stream()
                 .filter(todo -> todo.getId() == id)
                 .findFirst();
     }
-    
+
+    public void updateTodo(Todo todo) {
+        findById(todo.getId()).ifPresent(existingTodo -> existingTodo.updateFieldsFrom(todo));
+    }
 }

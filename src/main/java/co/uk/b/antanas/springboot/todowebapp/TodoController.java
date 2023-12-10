@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @SessionAttributes("name")
@@ -27,15 +28,17 @@ public class TodoController {
 
     // /list-todos
     @RequestMapping("list-todos")
-    public String listAllTodos(ModelMap modelMap) {
-        List<Todo> todos = todoService.findByUser(getCurrentUserName(modelMap));
-        modelMap.addAttribute("todos", todos);
+    public String listAllTodos(ModelMap model) {
+        String user = (String) model.get("name");
+        List<Todo> todos = todoService.findByUser(user);
+        model.addAttribute("todos", todos);
         return "listTodos";
     }
 
     @RequestMapping(value="add-todo", method = RequestMethod.GET)
     public String showNewTodoPage(ModelMap model) {
-        Todo todo = new Todo(0, getCurrentUserName(model), "", LocalDate.now().plusYears(1), false);
+        String user = (String) model.get("name");
+        Todo todo = new Todo(0, user, "", LocalDate.now().plusYears(1), false);
         model.put("todo", todo);
         return "todo";
     }
@@ -46,7 +49,8 @@ public class TodoController {
             return "todo";
         }
 
-        todoService.addTodo(getCurrentUserName(model), todo.getDescription() , LocalDate.now().plusYears(1), false);
+        String user = (String) model.get("name");
+        todoService.addTodo(user, todo.getDescription() , LocalDate.now().plusYears(1), false);
         return "redirect:list-todos";
     }
 
@@ -56,7 +60,27 @@ public class TodoController {
         return "redirect:list-todos";
     }
 
-    private synchronized static String getCurrentUserName(ModelMap model) {
-        return (String) model.get("name");
+    @RequestMapping(value="update-todo", method = RequestMethod.GET)
+    public String showUpdateTodoPage(ModelMap model, @RequestParam int id) {
+        Optional<Todo> todo = todoService.findById(id);
+        if(todo.isPresent()) {
+            model.put("todo", todo);
+            return "todo";
+        } else {
+            throw new IllegalStateException("todo shouldn't be null when we are editing it!");
+        }
     }
+
+    @RequestMapping(value="update-todo", method = RequestMethod.POST)
+    public String updateTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
+        if (result.hasErrors()){
+            return "todo";
+        }
+
+        System.out.println(todo.toString());
+        todoService.updateTodo(todo);
+        return "redirect:list-todos";
+    }
+
+
 }
