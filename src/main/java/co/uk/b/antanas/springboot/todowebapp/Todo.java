@@ -97,9 +97,14 @@ public class Todo {
         if (source.getUsername() != null) {
             this.setUsername(source.getUsername());
         }
+
+
         if (source.getTargetDate() != null) {
             this.setTargetDate(source.getTargetDate());
         }
+
         this.setDone(source.isDone());
     }
+
+
 }

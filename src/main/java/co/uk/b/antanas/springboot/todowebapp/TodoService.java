@@ -1,5 +1,6 @@
 package co.uk.b.antanas.springboot.todowebapp;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ public class TodoService {
 
     private static final AtomicInteger lastTodoId = new AtomicInteger(5);
     private static final List<Todo> todos = new ArrayList<>();
+
 
     static {
         todos.add(new Todo(1, "tony", "Learn Spring", LocalDate.now().plusWeeks(12), false));
@@ -47,4 +49,5 @@ public class TodoService {
     public void updateTodo(Todo todo) {
         findById(todo.getId()).ifPresent(existingTodo -> existingTodo.updateFieldsFrom(todo));
     }
+
 }

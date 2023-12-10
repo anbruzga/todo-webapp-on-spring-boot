@@ -21,6 +21,7 @@ public class TodoController {
     private final TodoService todoService;
 
 
+
     @Autowired
     public TodoController(TodoService todoService) {
         this.todoService = todoService;
@@ -50,7 +51,7 @@ public class TodoController {
         }
 
         String user = (String) model.get("name");
-        todoService.addTodo(user, todo.getDescription() , LocalDate.now().plusYears(1), false);
+        todoService.addTodo(user, todo.getDescription() , todo.getTargetDate(), false);
         return "redirect:list-todos";
     }
 
@@ -64,7 +65,7 @@ public class TodoController {
     public String showUpdateTodoPage(ModelMap model, @RequestParam int id) {
         Optional<Todo> todo = todoService.findById(id);
         if(todo.isPresent()) {
-            model.put("todo", todo);
+            model.put("todo", todo.get());
             return "todo";
         } else {
             throw new IllegalStateException("todo shouldn't be null when we are editing it!");
