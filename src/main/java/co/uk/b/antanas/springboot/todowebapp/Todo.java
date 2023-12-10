@@ -1,5 +1,9 @@
 package co.uk.b.antanas.springboot.todowebapp;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
@@ -8,8 +12,13 @@ import java.time.LocalDate;
 // Static List of todos => Database (H2, MySQL)
 
 
+@Entity
 public class Todo {
+
+    @Id
+    @GeneratedValue
     private int id;
+
     private String username;
 
     @Size(min=3, max=255, message="Description length has to be between 3 and 255 characters")
@@ -24,6 +33,10 @@ public class Todo {
         this.description = description;
         this.targetDate = targetDate;
         this.done = done;
+    }
+
+    public Todo() {
+
     }
 
     public int getId() {
@@ -105,6 +118,5 @@ public class Todo {
 
         this.setDone(source.isDone());
     }
-
 
 }
