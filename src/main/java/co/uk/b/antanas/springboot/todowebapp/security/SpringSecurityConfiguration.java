@@ -20,16 +20,20 @@ public class SpringSecurityConfiguration {
 
     @Bean
     public InMemoryUserDetailsManager createUserDetailsManager() {
-        Function<String, String> pswEncoderFunction = input -> passwordEncoder().encode(input);
+        UserDetails userDetails1 = createNewUser("Tony", "1122");
+        UserDetails userDetails2 = createNewUser("Agatka", "1122");
+        return new InMemoryUserDetailsManager(userDetails1, userDetails2);
+    }
 
+    private UserDetails createNewUser(String tony, String number) {
+        Function<String, String> pswEncoderFunction = input -> passwordEncoder().encode(input);
         UserDetails userDetails = User.builder()
                 .passwordEncoder(pswEncoderFunction)
-                .username("Tony")
-                .password("1122")
+                .username(tony)
+                .password(number)
                 .roles("USER", "ADMIN")
                 .build();
-
-        return new InMemoryUserDetailsManager(userDetails);
+        return userDetails;
     }
 
     @Bean
