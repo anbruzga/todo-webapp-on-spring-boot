@@ -1,15 +1,6 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ include file="common/header.jspf" %>
+<%@ include file="common/navigation.jspf" %>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          crossorigin="anonymous">
-    <meta charset="UTF-8">
-    <title>To Do's Page</title>
-</head>
-<body>
 <main>
     <div class="container">
         <div style="text-align: center;">
@@ -17,7 +8,6 @@
             <hr>
         </div>
 
-        <div><h1>Your todo's are: </h1></div>
         <table class="table">
             <thead>
             <tr>
@@ -46,8 +36,4 @@
 
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-        crossorigin="anonymous"></script>
-<script src=https://code.jquery.com/jquery-3.7.1.js></script>
-</body>
-</html>
+<%@ include file="common/footer.jspf" %>

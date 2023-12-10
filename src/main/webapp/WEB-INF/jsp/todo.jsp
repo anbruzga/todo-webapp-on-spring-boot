@@ -1,23 +1,13 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ include file="common/header.jspf" %>
+<%@ include file="common/navigation.jspf" %>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          crossorigin="anonymous">
-
-    <link href="webjars\bootstrap-datepicker\1.10.0\css\bootstrap-datepicker.min.css"
-          rel="stylesheet">
-
-    <meta charset="UTF-8">
-
-    <title>Add To Do's Page</title>
-</head>
-<body>
 <div class="container">
 <main>
+    <div style="text-align: center;">
+        <h4>Add/Modify Todo</h4>
+        <hr>
+    </div>
+
     <div>
         <h1>Enter Todo Details</h1>
         <form:form method="post" modelAttribute="todo">
@@ -44,11 +34,7 @@
 
 </main>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-        crossorigin="anonymous"></script>
-<script src=https://code.jquery.com/jquery-3.7.1.js></script>
-
+<%@ include file="common/footer.jspf" %>
 <script src=webjars\bootstrap-datepicker\1.10.0\js\bootstrap-datepicker.min.js></script>
 
 <script type="text/javascript">
@@ -56,5 +42,3 @@
         format: 'yyyy-mm-dd'
     });
 </script>
-</body>
-</html>
