@@ -1,5 +1,6 @@
 package co.uk.b.antanas.springboot.todowebapp;
 
+import co.uk.b.antanas.springboot.todowebapp.security.UserContext;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,26 +20,31 @@ import java.util.Optional;
 public class TodoController {
 
     private final TodoService todoService;
-
-
+    private final UserContext userContext;
 
     @Autowired
-    public TodoController(TodoService todoService) {
+    public TodoController(TodoService todoService, UserContext userContext) {
         this.todoService = todoService;
+        this.userContext = userContext;
     }
+
 
     // /list-todos
     @RequestMapping("list-todos")
     public String listAllTodos(ModelMap model) {
-        String user = (String) model.get("name");
+        String user = getUserName();
         List<Todo> todos = todoService.findByUser(user);
         model.addAttribute("todos", todos);
         return "listTodos";
     }
 
+    private String getUserName() {
+        return userContext.getLoggedInUsername();
+    }
+
     @RequestMapping(value="add-todo", method = RequestMethod.GET)
     public String showNewTodoPage(ModelMap model) {
-        String user = (String) model.get("name");
+        String user = getUserName();
         Todo todo = new Todo(0, user, "", LocalDate.now().plusYears(1), false);
         model.put("todo", todo);
         return "todo";
@@ -50,7 +56,7 @@ public class TodoController {
             return "todo";
         }
 
-        String user = (String) model.get("name");
+        String user = getUserName();
         todoService.addTodo(user, todo.getDescription() , todo.getTargetDate(), false);
         return "redirect:list-todos";
     }
