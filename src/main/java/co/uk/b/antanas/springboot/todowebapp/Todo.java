@@ -17,7 +17,7 @@ public class Todo {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
 
     private String username;
 
@@ -27,7 +27,7 @@ public class Todo {
     private boolean done;
 
 
-    public Todo(int id, String username, String description, LocalDate targetDate, boolean done) {
+    public Todo(Integer id, String username, String description, LocalDate targetDate, boolean done) {
         this.id = id;
         this.username = username;
         this.description = description;
@@ -35,15 +35,25 @@ public class Todo {
         this.done = done;
     }
 
+    // Without ID for JPA to manage ID automatically
+    public Todo(String username, String description, LocalDate targetDate, boolean done) {
+        this.id = id;
+        this.username = username;
+        this.description = description;
+        this.targetDate = targetDate;
+        this.done = done;
+    }
+
+
     public Todo() {
 
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
